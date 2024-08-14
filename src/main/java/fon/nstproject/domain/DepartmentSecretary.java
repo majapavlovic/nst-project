@@ -25,8 +25,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="department_manager_hist")
-public class DepartmentManagerHist {
+@Table(name="department_secretary_hist")
+public class DepartmentSecretary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
