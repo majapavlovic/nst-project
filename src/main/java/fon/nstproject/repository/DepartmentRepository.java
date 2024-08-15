@@ -6,11 +6,12 @@ package fon.nstproject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import fon.nstproject.domain.Department;
+import java.util.Optional;
 
 /**
  *
  * @author User
  */
 public interface DepartmentRepository extends JpaRepository<Department, Long>{
-    
+    Optional<Department> findByName(String name);
 }

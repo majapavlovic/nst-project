@@ -4,16 +4,11 @@
  */
 package fon.nstproject.service;
 
-import java.util.List;
+import fon.nstproject.dto.DepartmentDto;
 
 /**
  *
  * @author User
  */
-public interface DomainService <T, ID>{
-    T save(T t) throws Exception;
-    T getById(ID id) throws Exception;
-    T update(T t) throws Exception;
-    void deleteById(ID id) throws Exception;  
-    List<T> getAll();
+public interface DepartmentService extends DomainService<DepartmentDto, Long>{            
 }
