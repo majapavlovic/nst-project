@@ -32,5 +32,21 @@ public class DtoEntityMapper {
         return dept;
     }
 
+    public SubjectDto mapSubjectToDto(Subject s) {
+        SubjectDto subDto = new SubjectDto();
+        subDto.setId(s.getId());
+        subDto.setName(s.getName());
+        subDto.setEspb(s.getEspb());
+        subDto.setDepartmentId(s.getDepartment().getId());
+        return subDto;
+    }
+    
+    public Subject mapDtoToSubject(SubjectDto subDto) {
+        Subject s = new Subject();
+        s.setId(subDto.getId());
+        s.setName(subDto.getName());
+        s.setEspb(subDto.getEspb());
+        return s;
+    }
     
 }

@@ -73,7 +73,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             Department department = dept.get();
             departmentRepository.delete(department);
         } else {
-            throw new Exception("Department not found");
+            throw new Exception("Department d!");
         }
     }
 
