@@ -10,5 +10,5 @@ import fon.nstproject.dto.DepartmentDto;
  *
  * @author User
  */
-public interface DepartmentService extends DomainService<DepartmentDto, Long>{            
+public interface DepartmentService extends DomainService<DepartmentDto, DepartmentDto, Long>{            
 }

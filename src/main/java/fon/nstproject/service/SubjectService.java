@@ -4,12 +4,14 @@
  */
 package fon.nstproject.service;
 
-import fon.nstproject.dto.SubjectDto;
+import fon.nstproject.dto.subject.SubjectRequestDto;
+import fon.nstproject.dto.subject.SubjectResponseDto;
 
 /**
  *
  * @author User
  */
-public interface SubjectService extends DomainService<SubjectDto, Long> {
+public interface SubjectService extends DomainService<SubjectRequestDto, SubjectResponseDto, Long> {
     
 }
+

@@ -26,37 +26,41 @@ import org.springframework.web.bind.annotation.RestController;
  * @author User
  */
 @RestController
-@RequestMapping("/nst/department")
+@RequestMapping("/nst/api/v1/department")
 public class DepartmentController {
-    
+
     @Autowired
     private DepartmentService deptService;
-  
-       
-    @GetMapping("/departments")
-    public ResponseEntity<List<DepartmentDto>> getAll(){
+
+    @GetMapping("")
+    public ResponseEntity<List<DepartmentDto>> getAll() {
         List<DepartmentDto> depts = deptService.getAll();
         return new ResponseEntity<>(depts, HttpStatus.OK);
     }
-    
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DepartmentDto> getById(@PathVariable Long id) throws Exception{
+        DepartmentDto department = deptService.getById(id);
+        return new ResponseEntity<>(department, HttpStatus.FOUND);
+    }   
+
     @PostMapping
-    public ResponseEntity<DepartmentDto> save(@Valid @RequestBody DepartmentDto departmentDto)  throws Exception{
+    public ResponseEntity<DepartmentDto> save(@Valid @RequestBody DepartmentDto departmentDto) throws Exception {
         DepartmentDto deptDto = deptService.save(departmentDto);
         return new ResponseEntity<>(deptDto, HttpStatus.CREATED);
-    }    
-    
+    }
+
     @PatchMapping
     public ResponseEntity<DepartmentDto> update(@Valid @RequestBody DepartmentDto departmentDto) throws Exception {
         DepartmentDto deptDto = deptService.update(departmentDto);
         return new ResponseEntity<>(deptDto, HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delteById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<String> deleteById(@PathVariable Long id) throws Exception {
         deptService.deleteById(id);
         return new ResponseEntity<>("Department removed!", HttpStatus.OK);
 
     }
-    
+
 }
- 

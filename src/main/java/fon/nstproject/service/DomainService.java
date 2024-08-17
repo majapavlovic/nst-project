@@ -10,10 +10,10 @@ import java.util.List;
  *
  * @author User
  */
-public interface DomainService <T, ID>{
-    T save(T t) throws Exception;
-    T getById(ID id) throws Exception;
-    T update(T t) throws Exception;
+public interface DomainService <Req, Res, ID>{
+    Res save(Req t) throws Exception;
+    Res getById(ID id) throws Exception;
+    Res update(Req t) throws Exception;
     void deleteById(ID id) throws Exception;  
-    List<T> getAll();
+    List<Res> getAll();
 }

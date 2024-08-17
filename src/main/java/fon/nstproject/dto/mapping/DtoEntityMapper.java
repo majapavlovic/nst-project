@@ -4,6 +4,8 @@
  */
 package fon.nstproject.dto.mapping;
 
+import fon.nstproject.dto.subject.SubjectRequestDto;
+import fon.nstproject.dto.subject.SubjectResponseDto;
 import fon.nstproject.dto.*;
 import fon.nstproject.domain.*;
 import org.springframework.stereotype.Component;
@@ -32,21 +34,40 @@ public class DtoEntityMapper {
         return dept;
     }
 
-    public SubjectDto mapSubjectToDto(Subject s) {
-        SubjectDto subDto = new SubjectDto();
-        subDto.setId(s.getId());
-        subDto.setName(s.getName());
-        subDto.setEspb(s.getEspb());
-        subDto.setDepartmentId(s.getDepartment().getId());
+    public SubjectResponseDto mapSubjectToResponseDto(Subject s) {
+        SubjectResponseDto subDto = new SubjectResponseDto(
+        s.getId(),
+        s.getName(),
+        s.getEspb(),
+        mapDepartmentToDto(s.getDepartment()));
         return subDto;
     }
     
-    public Subject mapDtoToSubject(SubjectDto subDto) {
+    public Subject mapRequestDtoToSubject(SubjectRequestDto subDto) {
         Subject s = new Subject();
-        s.setId(subDto.getId());
-        s.setName(subDto.getName());
-        s.setEspb(subDto.getEspb());
+        s.setId(subDto.id());
+        s.setName(subDto.name());
+        s.setEspb(subDto.espb());
         return s;
     }
+    
+     public Subject mapResponseDtoToSubject(SubjectResponseDto subDto) {
+        Subject s = new Subject();
+        s.setId(subDto.id());
+        s.setName(subDto.name());
+        s.setEspb(subDto.espb());
+        s.setDepartment(mapDtoToDepartment(subDto.department()));
+        return s;
+    }
+    
+    public SubjectRequestDto mapSubjectToRequestDto(Subject s) {
+        SubjectRequestDto requestDto = new SubjectRequestDto(
+        s.getId(),
+        s.getName(),
+        s.getEspb(),
+        s.getDepartment().getId());
+        return requestDto;
+    }
+    
     
 }
