@@ -4,10 +4,15 @@
  */
 package fon.nstproject.dto;
 
+import lombok.Builder;
+
 /**
  *
  * @author User
  */
-public class AcademicTitleDto {
-    
+@Builder
+public record AcademicTitleDto(
+        Long id,
+        String academicTitle) {
+
 }

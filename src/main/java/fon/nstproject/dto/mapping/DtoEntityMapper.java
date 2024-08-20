@@ -68,6 +68,44 @@ public class DtoEntityMapper {
         s.getDepartment().getId());
         return requestDto;
     }
+    public AcademicTitle mapDtoToAcademicTitle(AcademicTitleDto dto) {
+        AcademicTitle title = new AcademicTitle();
+        title.setId(dto.id());
+        title.setAcademicTitle(dto.academicTitle());
+        return title;
+    } 
+    public AcademicTitleDto mapAcademicTitleToDto(AcademicTitle title) {
+        AcademicTitleDto dto = new AcademicTitleDto(
+        title.getId(),
+        title.getAcademicTitle());
+        return dto;
+    }     
+    
+    public EducationTitle mapDtoToEducationTitle(EducationTitleDto dto) {
+        EducationTitle title = new EducationTitle();
+        title.setId(dto.id());
+        title.setEducationTitle(dto.educationTitle());
+        return title;
+    } 
+    public EducationTitleDto mapEducationTitleToDto(EducationTitle title) {
+        EducationTitleDto dto = new EducationTitleDto(
+        title.getId(),
+        title.getEducationTitle());
+        return dto;
+    }  
+    
+       public ScientificField mapDtoToScientificField(ScientificFieldDto dto) {
+        ScientificField field = new ScientificField();
+        field.setId(dto.id());
+        field.setScientificField(dto.scientificField());
+        return field;
+    } 
+    public ScientificFieldDto mapScientificFieldToDto(ScientificField field) {
+        ScientificFieldDto dto = new ScientificFieldDto(
+        field.getId(),
+        field.getScientificField());
+        return dto;
+    }     
     
     
 }

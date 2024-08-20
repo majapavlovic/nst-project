@@ -8,6 +8,8 @@ package fon.nstproject.dto;
  *
  * @author User
  */
-public class ScientificFieldDto {
-    
+public record ScientificFieldDto(
+        Long id,
+        String scientificField) {
+
 }

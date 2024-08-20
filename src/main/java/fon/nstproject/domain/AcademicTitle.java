@@ -24,10 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="academic_title")
 public class AcademicTitle {
-     @Id
+    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name="academic_title")
+    @Column(name="academic_title", unique=true)
     private String academicTitle;
 }
