@@ -4,10 +4,13 @@
  */
 package fon.nstproject.dto;
 
+import lombok.Builder;
+
 /**
  *
  * @author User
  */
+@Builder
 public record ScientificFieldDto(
         Long id,
         String scientificField) {

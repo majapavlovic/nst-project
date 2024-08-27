@@ -5,11 +5,13 @@
 package fon.nstproject.dto.subject;
 
 import fon.nstproject.dto.DepartmentDto;
+import lombok.Builder;
 
 /**
  *
  * @author User
  */
+@Builder
 public record SubjectResponseDto(
         Long id,
         String name,

@@ -31,7 +31,7 @@ public class EducationTitleController {
     private EducationTitleService educationTitleService;
 
    @GetMapping
-    public ResponseEntity<List<EducationTitleDto>> getAll() {
+    public ResponseEntity<List<EducationTitleDto>> getAll() {              
         List<EducationTitleDto> titles = educationTitleService.getAll();
         return new ResponseEntity<>(titles, HttpStatus.OK);
     }

@@ -27,20 +27,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("nst/api/v1/scientific-field")
 public class ScientificFieldController {
-     @Autowired
+
+    @Autowired
     private ScientificFieldService scientificFieldService;
 
-   @GetMapping
+    @GetMapping
     public ResponseEntity<List<ScientificFieldDto>> getAll() {
         List<ScientificFieldDto> fields = scientificFieldService.getAll();
         return new ResponseEntity<>(fields, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScientificFieldDto> getById(@PathVariable Long id) throws Exception{
+    public ResponseEntity<ScientificFieldDto> getById(@PathVariable Long id) throws Exception {
         ScientificFieldDto field = scientificFieldService.getById(id);
         return new ResponseEntity<>(field, HttpStatus.FOUND);
-    }   
+    }
 
     @PostMapping
     public ResponseEntity<ScientificFieldDto> save(@Valid @RequestBody ScientificFieldDto dto) throws Exception {

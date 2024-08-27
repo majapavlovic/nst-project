@@ -34,7 +34,6 @@ public class SubjectController {
 
     @PostMapping
     public ResponseEntity<SubjectResponseDto> save(@Valid @RequestBody SubjectRequestDto subjectDto) throws Exception {
-        System.out.println(subjectDto);
         SubjectResponseDto subDto = subjectService.save(subjectDto);
         return new ResponseEntity<>(subDto, HttpStatus.CREATED);
     }

@@ -11,9 +11,10 @@ import lombok.Builder;
  * @author User
  */
 @Builder
-public record SubjectRequestDto (
-     Long id,
+public record SubjectRequestDto(
+        Long id,
         String name,
         int espb,
-        Long departmentId ){
+        Long departmentId) {
+
 }
