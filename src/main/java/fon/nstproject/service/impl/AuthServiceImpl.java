@@ -10,7 +10,6 @@ import fon.nstproject.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,10 @@ public class AuthServiceImpl implements UserDetailsService {
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.username(), encryptedPassword, data.role());
         return repository.save(newUser);
+    }
+    
+    public void updateUserData(User user) throws Exception {
+        repository.save(user);
     }
 
 }

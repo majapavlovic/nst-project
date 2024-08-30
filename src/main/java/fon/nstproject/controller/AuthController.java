@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /**
  *
@@ -43,10 +45,14 @@ public class AuthController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<JwtDto> signIn(@Valid @RequestBody SignInUserDto data) {
+    public ResponseEntity<JwtDto> signIn(@Valid @RequestBody SignInUserDto data) throws Exception {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.username(), data.password());
         var authUser = authenticationManager.authenticate(usernamePassword);
-        var accessToken = tokenService.generateAccessToken((User) authUser.getPrincipal());
+        var user = (User) authUser.getPrincipal();
+        var accessToken = tokenService.generateAccessToken(user);
+        user.setTokenExpiryDate(LocalDateTime.now().plusMinutes(30l).toInstant(ZoneOffset.UTC));
+        authService.updateUserData(user);
+
         return ResponseEntity.ok(new JwtDto(accessToken));
     }
 }

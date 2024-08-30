@@ -11,8 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import java.time.Instant;
 import jakarta.persistence.Table;
 import java.util.Collection;
 import java.util.List;
@@ -39,6 +38,7 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    private Instant tokenExpiryDate;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -64,7 +64,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return tokenExpiryDate == null || Instant.now().isBefore(tokenExpiryDate);
     }
 
     @Override

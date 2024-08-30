@@ -4,6 +4,7 @@
  */
 package fon.nstproject.config;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import fon.nstproject.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,6 +26,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     TokenProvider tokenService;
+
     @Autowired
     UserRepository userRepository;
 
@@ -33,10 +35,19 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         var token = this.recoverToken(request);
         if (token != null) {
-            var login = tokenService.validateToken(token);
-            var user = userRepository.findByUsername(login);
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            try {
+                var username = tokenService.validateToken(token);
+                var user = userRepository.findByUsername(username);
+
+                if (user != null && user.isAccountNonExpired()) {
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            } catch (JWTVerificationException e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Token is invalid or expired");
+                return;
+            }
         }
         filterChain.doFilter(request, response);
     }
