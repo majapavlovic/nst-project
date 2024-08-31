@@ -78,6 +78,8 @@ public class DtoEntityMapper {
     }
 
     public AcademicTitleDto mapAcademicTitleToDto(AcademicTitle title) {
+        if(title==null)
+            return null;
         AcademicTitleDto dto = new AcademicTitleDto(
                 title.getId(),
                 title.getAcademicTitle());
@@ -92,6 +94,8 @@ public class DtoEntityMapper {
     }
 
     public EducationTitleDto mapEducationTitleToDto(EducationTitle title) {
+        if(title==null)
+            return null;
         EducationTitleDto dto = new EducationTitleDto(
                 title.getId(),
                 title.getEducationTitle());
@@ -106,6 +110,8 @@ public class DtoEntityMapper {
     }
     
     public ScientificFieldDto mapScientificFieldToDto(ScientificField field) {
+        if(field==null)
+            return null;
         ScientificFieldDto dto = new ScientificFieldDto(
                 field.getId(),
                 field.getScientificField());
@@ -119,7 +125,7 @@ public class DtoEntityMapper {
                 m.getLastName(),
                 mapAcademicTitleToDto(m.getAcademicTitle()),
                 mapEducationTitleToDto(m.getEducationTitle()),
-                mapScientificFieldToDto(m.getScientficField()));
+                mapScientificFieldToDto(m.getScientificField()));
         return dto;
     }
 
@@ -138,7 +144,7 @@ public class DtoEntityMapper {
         m.setLastName(dto.lastName());
         m.setAcademicTitle(mapDtoToAcademicTitle(dto.academicTitle()));
         m.setEducationTitle(mapDtoToEducationTitle(dto.educationTitle()));
-        m.setScientficField(mapDtoToScientificField(dto.scientficField()));
+        m.setScientificField(mapDtoToScientificField(dto.scientificField()));
         return m;
     }
 
@@ -149,7 +155,7 @@ public class DtoEntityMapper {
                 m.getLastName(),
                 m.getAcademicTitle().getId(),
                 m.getEducationTitle().getId(),
-                m.getScientficField().getId());
+                m.getScientificField().getId());
         return dto;
     }
 

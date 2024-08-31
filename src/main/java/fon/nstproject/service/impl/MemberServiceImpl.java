@@ -109,7 +109,7 @@ public class MemberServiceImpl implements MemberService {
         if (t.scientificFieldId() != null) {
             Optional<ScientificField> scientific = scientificRepository.findById(t.scientificFieldId());
             if (scientific.isPresent()) {
-                m.setScientficField(scientific.get());
+                m.setScientificField(scientific.get());
             }
         }
         return m;

@@ -44,6 +44,6 @@ public class Member {
     
     @ManyToOne
     @JoinColumn(name="scientific_field")
-    private ScientificField scientficField;
+    private ScientificField scientificField;
 
 }

@@ -35,10 +35,10 @@ public class AuthConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(HttpMethod.POST, "nst/api/v1/auth/*").permitAll()
-                .requestMatchers(HttpMethod.POST, "nst/api/v1/*").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PATCH, "nst/api/v1/*").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "nst/api/v1/*").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "nst/api/v1/auth/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "nst/api/v1/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "nst/api/v1/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "nst/api/v1/**").hasRole("ADMIN")
                 .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

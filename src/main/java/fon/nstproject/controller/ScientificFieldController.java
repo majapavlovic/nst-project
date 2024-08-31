@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class ScientificFieldController {
     @GetMapping("/{id}")
     public ResponseEntity<ScientificFieldDto> getById(@PathVariable Long id) throws Exception {
         ScientificFieldDto field = scientificFieldService.getById(id);
-        return new ResponseEntity<>(field, HttpStatus.FOUND);
+        return new ResponseEntity<>(field, HttpStatus.OK);
     }
 
     @PostMapping
@@ -49,7 +50,7 @@ public class ScientificFieldController {
         return new ResponseEntity<>(field, HttpStatus.CREATED);
     }
 
-    @PatchMapping
+    @PutMapping
     public ResponseEntity<ScientificFieldDto> update(@Valid @RequestBody ScientificFieldDto dto) throws Exception {
         ScientificFieldDto field = scientificFieldService.update(dto);
         return new ResponseEntity<>(field, HttpStatus.OK);

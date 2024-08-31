@@ -21,6 +21,6 @@ public record MemberResponseDto(
         String lastName,
         AcademicTitleDto academicTitle,
         EducationTitleDto educationTitle,
-        ScientificFieldDto scientficField) {
+        ScientificFieldDto scientificField) {
     
 }

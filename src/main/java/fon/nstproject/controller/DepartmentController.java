@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,7 @@ public class DepartmentController {
     @GetMapping("/{id}")
     public ResponseEntity<DepartmentDto> getById(@PathVariable Long id) throws Exception{
         DepartmentDto department = deptService.getById(id);
-        return new ResponseEntity<>(department, HttpStatus.FOUND);
+        return new ResponseEntity<>(department, HttpStatus.OK);
     }   
 
     @PostMapping
@@ -50,7 +51,7 @@ public class DepartmentController {
         return new ResponseEntity<>(deptDto, HttpStatus.CREATED);
     }
 
-    @PatchMapping
+    @PutMapping
     public ResponseEntity<DepartmentDto> update(@Valid @RequestBody DepartmentDto departmentDto) throws Exception {
         DepartmentDto deptDto = deptService.update(departmentDto);
         return new ResponseEntity<>(deptDto, HttpStatus.OK);

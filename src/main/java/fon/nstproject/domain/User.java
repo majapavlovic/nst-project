@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.Instant;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,8 @@ public class User implements UserDetails {
     private Long id;
     private String username;
     private String password;
+    
+    @Transient
     private Instant tokenExpiryDate;
 
     @Enumerated(EnumType.STRING)
@@ -64,6 +67,8 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
+        System.out.println("TOKEN EXPIRY DATE: " +tokenExpiryDate);
+        System.out.println("INSTANT.NOW(): "+Instant.now());
         return tokenExpiryDate == null || Instant.now().isBefore(tokenExpiryDate);
     }
 

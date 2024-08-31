@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class AcademicTitleController {
     @GetMapping("/{id}")
     public ResponseEntity<AcademicTitleDto> getById(@PathVariable Long id) throws Exception{
         AcademicTitleDto at = academicTitleService.getById(id);
-        return new ResponseEntity<>(at, HttpStatus.FOUND);
+        return new ResponseEntity<>(at, HttpStatus.OK);
     }   
 
     @PostMapping
@@ -48,7 +49,7 @@ public class AcademicTitleController {
         return new ResponseEntity<>(academicTitle, HttpStatus.CREATED);
     }
 
-    @PatchMapping
+    @PutMapping
     public ResponseEntity<AcademicTitleDto> update(@Valid @RequestBody AcademicTitleDto dto) throws Exception {
         AcademicTitleDto academicTitle = academicTitleService.update(dto);
         return new ResponseEntity<>(academicTitle, HttpStatus.OK);
