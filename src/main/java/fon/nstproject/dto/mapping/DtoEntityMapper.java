@@ -8,8 +8,11 @@ import fon.nstproject.dto.subject.SubjectRequestDto;
 import fon.nstproject.dto.subject.SubjectResponseDto;
 import fon.nstproject.dto.*;
 import fon.nstproject.domain.*;
+import fon.nstproject.dto.departmentManager.DeptManagerRequestDto;
+import fon.nstproject.dto.departmentManager.DeptManagerResponseDto;
 import fon.nstproject.dto.member.MemberRequestDto;
 import fon.nstproject.dto.member.MemberResponseDto;
+import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -149,6 +152,8 @@ public class DtoEntityMapper {
     }
 
     public MemberRequestDto mapMemberToRequestDto(Member m) {
+        if(m==null)
+            return null;
         MemberRequestDto dto = new MemberRequestDto(
                 m.getId(),
                 m.getFirstName(),
@@ -156,6 +161,52 @@ public class DtoEntityMapper {
                 m.getAcademicTitle().getId(),
                 m.getEducationTitle().getId(),
                 m.getScientificField().getId());
+        return dto;
+    }      
+    
+    public DeptManagerResponseDto mapDeptManagerToResponseDto(DepartmentManager m) {
+        if(m==null)
+            return null;
+        DeptManagerResponseDto dto = new DeptManagerResponseDto(
+                m.getId(), 
+                mapMemberToResponseDto(m.getMember()), 
+                mapDepartmentToDto(m.getDepartment()), 
+                m.getStartDate(), 
+                m.getEndDate());
+        return dto;
+    }
+
+    public DepartmentManager mapRequestDtoToDeptManager(DeptManagerRequestDto dto) {
+        if(dto==null)
+            return null;
+        DepartmentManager m = new DepartmentManager();
+        m.setId(dto.id());
+        m.setStartDate(dto.startDate());
+        m.setEndDate(dto.endDate());
+        return m;
+    }
+
+    public DepartmentManager mapResponseDtoToDeptManager(DeptManagerResponseDto dto) {
+        if(dto==null)
+            return null;
+        DepartmentManager m = new DepartmentManager();
+        m.setId(dto.id());
+        m.setStartDate(dto.startDate());
+        m.setEndDate(dto.endDate());
+        m.setMember(mapResponseDtoToMember(dto.member()));
+        m.setDepartment(mapDtoToDepartment(dto.department()));
+        return m;
+    }
+
+    public DeptManagerRequestDto mapDeptManagerToRequestDto(DepartmentManager m) {
+        if(m==null)
+             return null;
+        DeptManagerRequestDto dto = new DeptManagerRequestDto(
+                m.getId(),
+                m.getMember().getId(), 
+                m.getDepartment().getId(), 
+                m.getStartDate(),
+                m.getEndDate());
         return dto;
     }
 

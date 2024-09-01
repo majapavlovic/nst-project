@@ -47,12 +47,17 @@ public class AuthController {
     @PostMapping("/sign-in")
     public ResponseEntity<JwtDto> signIn(@Valid @RequestBody SignInUserDto data) throws Exception {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.username(), data.password());
-        var authUser = authenticationManager.authenticate(usernamePassword);
-        var user = (User) authUser.getPrincipal();
+        User user = null;
+        try {
+            var authUser = authenticationManager.authenticate(usernamePassword);
+            user = (User) authUser.getPrincipal();
+        } catch (Exception e) {
+            throw new Exception("Bad username or password!");
+        }
         var accessToken = tokenService.generateAccessToken(user);
         user.setTokenExpiryDate(LocalDateTime.now().plusMinutes(30l).toInstant(ZoneOffset.UTC));
         authService.updateUserData(user);
 
-        return ResponseEntity.ok(new JwtDto(accessToken));
+        return ResponseEntity.ok(new JwtDto(accessToken, user.getUsername()));
     }
 }

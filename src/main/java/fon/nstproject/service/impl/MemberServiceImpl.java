@@ -11,6 +11,7 @@ import fon.nstproject.domain.Member;
 import fon.nstproject.domain.AcademicTitle;
 import fon.nstproject.domain.EducationTitle;
 import fon.nstproject.domain.ScientificField;
+import fon.nstproject.exception.NotFoundException;
 import fon.nstproject.repository.AcademicTitleRepository;
 import fon.nstproject.repository.EducationTitleRepositoy;
 import fon.nstproject.repository.MemberRepository;
@@ -69,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
             updated = setAdditionalFields(t, updated);
             return dtoEntityMapper.mapMemberToResponseDto(memberRepository.save(updated));
         } else {
-            throw new Exception("Member not found");
+            throw new NotFoundException("Member", "id", t.id().toString());
         }
     }
 
@@ -79,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
         if (dbMember.isPresent()) {
             memberRepository.delete(dbMember.get());
         } else {
-            throw new Exception("Member removed!");
+            throw new NotFoundException("Member", "id", id.toString());
         }
     }
 

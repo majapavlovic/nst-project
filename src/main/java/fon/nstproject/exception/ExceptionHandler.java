@@ -26,30 +26,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
-//    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class, HttpStatusCode status)
-//    public ResponseEntity<ErrorDetails> handleResourceNotFound(Exception e, WebRequest webRequest) {
-//
-//        ErrorDetails errorDetails = new ErrorDetails(e.getMessage(), webRequest.getHeader( )webRequest.getDescription(false));
-//        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-//
-//    }
-//
-//    @Override
-//    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-//        Map<String, String> errors = new HashMap<>();
-//        List<ObjectError> objectErrors = ex.getBindingResult().getAllErrors();
-//        for (ObjectError error : objectErrors) {
-//            String fieldName = ((FieldError) error).getField();
-//            String message = error.getDefaultMessage();
-//            errors.put(fieldName, message);
-//        }
-//        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-//    }
-    
-    
-//    @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
-//    public Map<String, String> handleInvalidArgument(MethodArgumentNotValidException exception) {
-//
-//    }
+    @org.springframework.web.bind.annotation.ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleNotFoundException(NotFoundException exception) {
+        ErrorDetails errorDetails = new ErrorDetails(exception.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDetails> handleException(Exception e) {
+        ErrorDetails errorDetails = new ErrorDetails(e.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
 }

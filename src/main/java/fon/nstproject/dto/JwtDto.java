@@ -9,6 +9,7 @@ package fon.nstproject.dto;
  * @author User
  */
 public record JwtDto(
-        String accessToken) {
+        String accessToken, 
+        String user) {
 
 }

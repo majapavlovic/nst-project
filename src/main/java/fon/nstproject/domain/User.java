@@ -67,8 +67,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        System.out.println("TOKEN EXPIRY DATE: " +tokenExpiryDate);
-        System.out.println("INSTANT.NOW(): "+Instant.now());
         return tokenExpiryDate == null || Instant.now().isBefore(tokenExpiryDate);
     }
 

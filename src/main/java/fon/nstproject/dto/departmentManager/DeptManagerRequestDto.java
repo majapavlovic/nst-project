@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package fon.nstproject.exception;
+package fon.nstproject.dto.departmentManager;
 
+import java.time.LocalDate;
 import lombok.Builder;
 
 /**
@@ -11,7 +12,10 @@ import lombok.Builder;
  * @author User
  */
 @Builder
-public record ErrorDetails(
-        String message) {
-
+public record DeptManagerRequestDto(
+        Long id,
+        Long memberId,
+        Long departmentId,
+        LocalDate startDate,
+        LocalDate endDate) {
 }

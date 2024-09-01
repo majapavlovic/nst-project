@@ -4,9 +4,9 @@
  */
 package fon.nstproject.controller;
 
-import fon.nstproject.dto.member.MemberRequestDto;
-import fon.nstproject.dto.member.MemberResponseDto;
-import fon.nstproject.service.MemberService;
+import fon.nstproject.dto.departmentManager.DeptManagerRequestDto;
+import fon.nstproject.dto.departmentManager.DeptManagerResponseDto;
+import fon.nstproject.service.DepartmentManagerService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,40 +26,39 @@ import org.springframework.web.bind.annotation.RestController;
  * @author User
  */
 @RestController
-@RequestMapping("nst/api/v1/member")
-public class MemberController {
-
+@RequestMapping("nst/api/v1/deparment-manager-history")
+public class DepartmentManagerController {
+    
     @Autowired
-    MemberService memberService;
+    DepartmentManagerService service;
 
     @PostMapping
-    public ResponseEntity<MemberResponseDto> save(@Valid @RequestBody MemberRequestDto dto) throws Exception {
-        MemberResponseDto res = memberService.save(dto);
+    public ResponseEntity<DeptManagerResponseDto> save(@Valid @RequestBody DeptManagerRequestDto dto) throws Exception {
+        DeptManagerResponseDto res = service.save(dto);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<MemberResponseDto> getById(@PathVariable Long id) throws Exception {
-        MemberResponseDto res = memberService.getById(id);
+    public ResponseEntity<DeptManagerResponseDto> getById(@PathVariable Long id) throws Exception {
+        DeptManagerResponseDto res = service.getById(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<MemberResponseDto> update(@Valid @RequestBody MemberRequestDto dto) throws Exception {
-        MemberResponseDto res = memberService.update(dto);
+    public ResponseEntity<DeptManagerResponseDto> update(@Valid @RequestBody DeptManagerRequestDto dto) throws Exception {
+        DeptManagerResponseDto res = service.update(dto);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) throws Exception {
-        memberService.deleteById(id);
+        service.deleteById(id);
         return new ResponseEntity<>("Member removed!", HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<MemberResponseDto>> getAll() throws Exception {
-        List<MemberResponseDto> res = memberService.getAll();
+    public ResponseEntity<List<DeptManagerResponseDto>> getAll() throws Exception {
+        List<DeptManagerResponseDto> res = service.getAll();
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-
 }
