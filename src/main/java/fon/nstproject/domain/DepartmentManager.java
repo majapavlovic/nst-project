@@ -45,5 +45,7 @@ public class DepartmentManager {
 
     @Column(name = "end_date")
     private LocalDate endDate;
+    
+    
 
 }
