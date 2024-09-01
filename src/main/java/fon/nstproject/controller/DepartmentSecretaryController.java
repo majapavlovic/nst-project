@@ -4,9 +4,9 @@
  */
 package fon.nstproject.controller;
 
-import fon.nstproject.dto.departmentManager.DeptManagerRequestDto;
-import fon.nstproject.dto.departmentManager.DeptManagerResponseDto;
-import fon.nstproject.service.DepartmentManagerService;
+import fon.nstproject.dto.departmentSecretary.DeptSecretaryRequestDto;
+import fon.nstproject.dto.departmentSecretary.DeptSecretaryResponseDto;
+import fon.nstproject.service.DepartmentSecretaryService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,32 +21,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
  *
  * @author User
  */
 @RestController
-@RequestMapping("nst/api/v1/deparment-manager-history")
-public class DepartmentManagerController {
-
+@RequestMapping("nst/api/v1/department-secretary-history")
+public class DepartmentSecretaryController {
     @Autowired
-    DepartmentManagerService service;
+    DepartmentSecretaryService service;
 
     @PostMapping
-    public ResponseEntity<DeptManagerResponseDto> save(@Valid @RequestBody DeptManagerRequestDto dto) throws Exception {
-        DeptManagerResponseDto res = service.save(dto);
+    public ResponseEntity<DeptSecretaryResponseDto> save(@Valid @RequestBody DeptSecretaryRequestDto dto) throws Exception {
+        DeptSecretaryResponseDto res = service.save(dto);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DeptManagerResponseDto> getById(@PathVariable Long id) throws Exception {
-        DeptManagerResponseDto res = service.getById(id);
+    public ResponseEntity<DeptSecretaryResponseDto> getById(@PathVariable Long id) throws Exception {
+        DeptSecretaryResponseDto res = service.getById(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<DeptManagerResponseDto> update(@Valid @RequestBody DeptManagerRequestDto dto) throws Exception {
-        DeptManagerResponseDto res = service.update(dto);
+    public ResponseEntity<DeptSecretaryResponseDto> update(@Valid @RequestBody DeptSecretaryRequestDto dto) throws Exception {
+        DeptSecretaryResponseDto res = service.update(dto);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -57,8 +57,8 @@ public class DepartmentManagerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DeptManagerResponseDto>> getAll() throws Exception {
-        List<DeptManagerResponseDto> res = service.getAll();
+    public ResponseEntity<List<DeptSecretaryResponseDto>> getAll() throws Exception {
+        List<DeptSecretaryResponseDto> res = service.getAll();
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
  * @author User
  */
 @Service
-public class DepartmentServiceManagerImpl implements DepartmentManagerService {
+public class DepartmentManagerServiceImpl implements DepartmentManagerService {
 
     @Autowired
     private DtoEntityMapper dtoEntityMapper;

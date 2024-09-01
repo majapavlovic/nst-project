@@ -10,6 +10,8 @@ import fon.nstproject.dto.*;
 import fon.nstproject.domain.*;
 import fon.nstproject.dto.departmentManager.DeptManagerRequestDto;
 import fon.nstproject.dto.departmentManager.DeptManagerResponseDto;
+import fon.nstproject.dto.departmentSecretary.DeptSecretaryRequestDto;
+import fon.nstproject.dto.departmentSecretary.DeptSecretaryResponseDto;
 import fon.nstproject.dto.member.MemberRequestDto;
 import fon.nstproject.dto.member.MemberResponseDto;
 import java.time.LocalDate;
@@ -202,6 +204,53 @@ public class DtoEntityMapper {
         if(m==null)
              return null;
         DeptManagerRequestDto dto = new DeptManagerRequestDto(
+                m.getId(),
+                m.getMember().getId(), 
+                m.getDepartment().getId(), 
+                m.getStartDate(),
+                m.getEndDate());
+        return dto;
+    }
+    
+    
+ public DeptSecretaryResponseDto mapDeptSecretaryToResponseDto(DepartmentSecretary m) {
+        if(m==null)
+            return null;
+        DeptSecretaryResponseDto dto = new DeptSecretaryResponseDto(
+                m.getId(), 
+                mapMemberToResponseDto(m.getMember()), 
+                mapDepartmentToDto(m.getDepartment()), 
+                m.getStartDate(), 
+                m.getEndDate());
+        return dto;
+    }
+
+    public DepartmentSecretary mapRequestDtoToDeptSecretary(DeptSecretaryRequestDto dto) {
+        if(dto==null)
+            return null;
+        DepartmentSecretary m = new DepartmentSecretary();
+        m.setId(dto.id());
+        m.setStartDate(dto.startDate());
+        m.setEndDate(dto.endDate());
+        return m;
+    }
+
+    public DepartmentSecretary mapResponseDtoToDeptSecretary(DeptSecretaryResponseDto dto) {
+        if(dto==null)
+            return null;
+        DepartmentSecretary m = new DepartmentSecretary();
+        m.setId(dto.id());
+        m.setStartDate(dto.startDate());
+        m.setEndDate(dto.endDate());
+        m.setMember(mapResponseDtoToMember(dto.member()));
+        m.setDepartment(mapDtoToDepartment(dto.department()));
+        return m;
+    }
+
+    public DeptSecretaryRequestDto mapDeptSecretaryToRequestDto(DepartmentSecretary m) {
+        if(m==null)
+             return null;
+        DeptSecretaryRequestDto dto = new DeptSecretaryRequestDto(
                 m.getId(),
                 m.getMember().getId(), 
                 m.getDepartment().getId(), 

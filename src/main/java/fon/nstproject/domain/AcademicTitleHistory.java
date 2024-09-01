@@ -48,7 +48,5 @@ public class AcademicTitleHistory {
     @ManyToOne
     @JoinColumn(name="member")
     private Member member;  
-       
-    
 
 }
