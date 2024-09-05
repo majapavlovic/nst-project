@@ -19,11 +19,13 @@ import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author User
  */
+@Service
 public class DepartmentSecretaryServiceImpl implements DepartmentSecretaryService{
     
 @Autowired
