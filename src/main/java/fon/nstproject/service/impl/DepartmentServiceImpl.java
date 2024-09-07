@@ -7,6 +7,7 @@ package fon.nstproject.service.impl;
 import fon.nstproject.domain.Department;
 import fon.nstproject.dto.DepartmentDto;
 import fon.nstproject.dto.mapping.DtoEntityMapper;
+import fon.nstproject.exception.NotFoundException;
 import fon.nstproject.repository.DepartmentRepository;
 import fon.nstproject.service.DepartmentService;
 import fon.nstproject.service.DomainService;
@@ -67,13 +68,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteById(Long id) throws Exception {
+    public void deleteById(Long id) throws NotFoundException {
         Optional<Department> dept = departmentRepository.findById(id);
         if (dept.isPresent()) {
             Department department = dept.get();
             departmentRepository.delete(department);
         } else {
-            throw new Exception("Department removed!");
+            throw new NotFoundException("Department", "id", id.toString());
         }
     }
 
