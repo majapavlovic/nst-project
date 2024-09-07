@@ -33,13 +33,13 @@ public class DepartmentController {
     @Autowired
     private DepartmentService deptService;
 
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<List<DepartmentDto>> getAll() {
         List<DepartmentDto> depts = deptService.getAll();
         return new ResponseEntity<>(depts, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<DepartmentDto> getById(@PathVariable Long id) throws Exception{
         DepartmentDto department = deptService.getById(id);
         return new ResponseEntity<>(department, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class DepartmentController {
         return new ResponseEntity<>(deptDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) throws Exception {
         deptService.deleteById(id);
         return new ResponseEntity<>("Department removed!", HttpStatus.OK);
