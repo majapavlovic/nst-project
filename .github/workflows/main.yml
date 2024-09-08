@@ -19,10 +19,10 @@ jobs:
           
       - name: Set up environment variables
         run: |
-          echo "DB_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
-          echo "DB_PASS=${{ secrets.DB_PASS }}" >> $GITHUB_ENV
-          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
+          echo "DB_URL=${{ secrets.DB_URL }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
 
       - name: Build with maven
         run: mvn clean install
