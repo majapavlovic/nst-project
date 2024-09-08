@@ -1,4 +1,5 @@
 name: Maven clean install on every push or pull request
+
 on:
   push:
     branches:
@@ -6,15 +7,29 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'oracle'
           java-version: '17'
-      - name: Build with maven
+
+      - name: Set up database configuration
+        run: |
+          echo "DB_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+          echo "DB_PASS=${{ secrets.DB_PASS }}" >> $GITHUB_ENV
+
+      - name: Build with Maven
         run: mvn clean install
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
