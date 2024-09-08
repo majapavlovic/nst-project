@@ -44,26 +44,27 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto getById(Long id) throws Exception {
+    public DepartmentDto getById(Long id) throws NotFoundException {
         Optional<Department> dbDept = departmentRepository.findById(id);
         if (dbDept.isPresent()) {
             Department department = dbDept.get();
             return dtoEntityMapper.mapDepartmentToDto(department);
         } else {
-            throw new Exception("Department not found");
+            throw new NotFoundException("Department", "id", id.toString());
         }
     }
 
     @Override
-    public DepartmentDto update(DepartmentDto t) throws Exception {
-        Optional<Department> dbDept = departmentRepository.findById(t.getId());
+    public DepartmentDto update(DepartmentDto t) throws NotFoundException {
+        Long id = t.getId();
+        Optional<Department> dbDept = departmentRepository.findById(id);
         if (dbDept.isPresent()) {
             Department updated = dbDept.get();
             updated.setName(t.getName());
             updated.setShortName(t.getShortName());
             return dtoEntityMapper.mapDepartmentToDto(departmentRepository.save(updated));
         } else {
-            throw new Exception("Department not found");
+            throw new NotFoundException("Department", "id", id.toString());
         }
     }
 
