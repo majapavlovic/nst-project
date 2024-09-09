@@ -5,6 +5,7 @@
 package fon.nstproject.repository;
 
 import fon.nstproject.domain.Subject;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author User
  */
 public interface SubjectRepository extends  JpaRepository<Subject, Long>{
-    
+     List<Subject> findByDepartmentId(Long departmentId);
 }
