@@ -62,4 +62,10 @@ public class SubjectController {
         SubjectResponseDto subDto = subjectService.update(subjectDto);
         return new ResponseEntity<>(subDto, HttpStatus.OK);
     }
+    
+    @GetMapping("/department/{departmentId}")
+    public ResponseEntity<List<SubjectResponseDto>> getSubjectsByDepartment(@PathVariable Long departmentId) {
+        List<SubjectResponseDto> subjects = subjectService.getSubjectsByDepartment(departmentId);
+        return ResponseEntity.ok(subjects);
+    }
 }

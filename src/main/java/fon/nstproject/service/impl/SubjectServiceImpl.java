@@ -91,4 +91,10 @@ public class SubjectServiceImpl implements SubjectService{
                 .collect(Collectors.toList());
     }
     
+    
+    public List<SubjectResponseDto> getSubjectsByDepartment(Long departmentId) {
+        return subjectRepository
+                  .findByDepartmentId(departmentId).stream().map(entity -> dtoEntityMapper.mapSubjectToResponseDto(entity))
+                .collect(Collectors.toList());
+    }
 }
